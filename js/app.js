@@ -37,13 +37,13 @@ var navbarList = document.getElementById('navbar__list');
  *
  */
 
-// build the nav
+
 
 // function Enent lsiten
 function lsitenEnentClick(e){
     getActiveSection(sections,this.textContent);
 }
-
+// build the nav
 function createListNav(section) {
     let text =  section.getAttribute("data-nav");
     let newtext = document.createTextNode(text);
@@ -56,7 +56,7 @@ sections.forEach(createListNav);
 navbarList.appendChild(docFragment);
 
 
-// function scroll to section on link click
+// function scroll to section when link clicked
 
 function getActiveSection(sections,text) {
     sections.forEach(function (sec) {
@@ -73,13 +73,12 @@ function getActiveSection(sections,text) {
     });
 }
 
-//when scroll
+//function event when scroll add class active
 
 document.addEventListener('scroll',function (){
-    let rect = document.body.getBoundingClientRect();
-    sections.forEach(function (sec){
-
-        if( sec.offsetTop === rect.top.toFixed()){
+    let scrollPosition = document.body.scrollTop;
+    sections.forEach(function (sec) {
+        if(scrollPosition >= sec.offsetTop && scrollPosition < sec.offsetHeight + sec.offsetTop){
             if(sec.className !== 'active'){
                 let ele =  document.getElementsByClassName('active');
                 ele[0].classList.remove('active');
